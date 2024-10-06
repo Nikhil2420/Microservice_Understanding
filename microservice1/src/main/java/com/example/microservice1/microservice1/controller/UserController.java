@@ -1,6 +1,8 @@
 package com.example.microservice1.microservice1.controller;
 
 import com.example.microservice1.microservice1.dto.Department;
+import com.example.microservice1.microservice1.dto.Information;
+import com.example.microservice1.microservice1.dto.Responce;
 import com.example.microservice1.microservice1.dto.User;
 import com.example.microservice1.microservice1.repo.UserRepository;
 import com.example.microservice1.microservice1.service.impl.UserService;
@@ -42,13 +44,15 @@ public class UserController {
     }
 
     @GetMapping(value = "/fetchDepartment",produces = MediaType.APPLICATION_JSON_VALUE)
-    public Mono<Object>  getAllDepartmentFromSupport1Service() {
+    public Responce  getAllDepartmentFromSupport1Service() {
         Flux<Department> departmentFlux= this.userService.getAllDepartmentFromSupport1Service();
-              return   departmentFlux.flatMap(obj -> webClient.post()
-                        .uri("http://localhost:8081/api/v1/proceesing/processed")
-                        .bodyValue(obj)
-                        .retrieve()
-                        .bodyToMono(Object.class));
+        Flux<User> userFlux=this.userRepository.findAll();
+        Flux<Information> informationFlux=this.userService.getAllINformationFromMicroservice2();
+        Responce responce=new Responce();
+        responce.setDepartment(departmentFlux);
+        responce.setUser(userFlux);
+        responce.setInformation(informationFlux);
+        return responce;
     }
 
 }

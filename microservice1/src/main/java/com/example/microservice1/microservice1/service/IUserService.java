@@ -1,6 +1,9 @@
 package com.example.microservice1.microservice1.service;
 
+import com.example.microservice1.microservice1.dto.Department;
+import com.example.microservice1.microservice1.dto.Information;
 import com.example.microservice1.microservice1.dto.User;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface IUserService {
@@ -10,4 +13,6 @@ public interface IUserService {
     Boolean validation(User user);
 
     Object getAllDepartmentFromSupport1Service();
+
+    Flux<Information> getAllINformationFromMicroservice2();
 }
