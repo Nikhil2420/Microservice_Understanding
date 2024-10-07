@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 @Service
 @Slf4j
 public class UserService implements IUserService {
-    
+
     @Autowired
     private UserRepository userRepository;
 
@@ -27,28 +27,29 @@ public class UserService implements IUserService {
     public Mono<String> createUser(User user) {
         log.info(String.valueOf(user));
 
-        Mono<String> a =  userRepository.save(user)
-                .flatMap(x-> Mono.just("success"));
+        Mono<String> a = userRepository.save(user)
+                .flatMap(x -> Mono.just("success"));
 
         return a;
     }
 
     @Override
     public Boolean validation(User user) {
-       boolean flag=false;
-       if(user.getName().length()<2)return flag;
-       if(!user.getEmail().contains("@"))return flag;
-       flag=true;
-       return flag;
+        boolean flag = false;
+        if (user.getName().length() < 2) return flag;
+        if (!user.getEmail().contains("@")) return flag;
+        flag = true;
+        return flag;
     }
 
     @Override
     public Flux<Department> getAllDepartmentFromSupport1Service() {
-    return webClientConfig.get().
-               uri("/ap1/v1/department/getAllDepartment").
-               accept(MediaType.APPLICATION_JSON).
-               retrieve().
-               bodyToFlux(Department.class);
+        return webClientConfig
+                .get().
+                uri("/ap1/v1/department/getAllDepartment").
+                accept(MediaType.APPLICATION_JSON).
+                retrieve().
+                bodyToFlux(Department.class);
 
 
     }

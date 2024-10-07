@@ -23,7 +23,6 @@ public class ProcessingController {
                 .accept(MediaType.APPLICATION_JSON).
                 retrieve().
                 bodyToFlux(Information.class);
-
     }
 
 
