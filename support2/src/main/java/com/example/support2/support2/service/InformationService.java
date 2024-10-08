@@ -18,6 +18,6 @@ public class InformationService {
     }
 
     public Flux<Information> getAllInformation() {
-        return informationRepository.getAllInformation();
+        return informationRepository.findAll();
     }
 }

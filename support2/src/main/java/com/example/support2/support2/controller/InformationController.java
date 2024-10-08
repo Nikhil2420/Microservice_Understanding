@@ -19,13 +19,13 @@ public class InformationController {
     @Autowired
     private InformationService informationService;
 
-    @PostMapping(value = "/add",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Mono<Information> addInformation(@RequestBody Information information){
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Mono<Information> addInformation(@RequestBody Information information) {
         return this.informationService.addInformation(information);
     }
 
-    @GetMapping(value = "/getAllInformation",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Flux<Information> getAllInformation(){
+    @GetMapping(value = "/getAllInformation", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Flux<Information> getAllInformation() {
         return this.informationService.getAllInformation();
     }
 }

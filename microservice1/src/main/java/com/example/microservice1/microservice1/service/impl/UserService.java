@@ -27,37 +27,37 @@ public class UserService implements IUserService {
     public Mono<String> createUser(User user) {
         log.info(String.valueOf(user));
 
-        Mono<String> a = userRepository.save(user)
-                .flatMap(x -> Mono.just("success"));
+        Mono<String> a =  userRepository.save(user)
+                .flatMap(x-> Mono.just("success"));
 
         return a;
     }
 
     @Override
     public Boolean validation(User user) {
-        boolean flag = false;
-        if (user.getName().length() < 2) return flag;
-        if (!user.getEmail().contains("@")) return flag;
-        flag = true;
-        return flag;
+       boolean flag=false;
+       if(user.getName().length()<2)return flag;
+       if(!user.getEmail().contains("@"))return flag;
+       flag=true;
+       return flag;
     }
 
     @Override
     public Flux<Department> getAllDepartmentFromSupport1Service() {
-        return webClientConfig
-                .get().
-                uri("/ap1/v1/department/getAllDepartment").
-                accept(MediaType.APPLICATION_JSON).
-                retrieve().
-                bodyToFlux(Department.class);
+    return webClientConfig.get().
+               uri("http://localhost:9090/ap1/v1/department/getAllDepartment").
+               accept(MediaType.APPLICATION_JSON).
+               retrieve().
+               bodyToFlux(Department.class);
 
 
     }
 
     @Override
     public Flux<Information> getAllINformationFromMicroservice2() {
+        System.out.println("heyyyy");
         return webClientConfig.get()
-                .uri("http:locolhost:8081/api/v1/proceesing/processed")
+                .uri("http://localhost:8081/api/v1/proceesing/processed")
                 .retrieve()
                 .bodyToFlux(Information.class);
     }

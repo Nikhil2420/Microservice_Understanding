@@ -9,6 +9,6 @@ import reactor.core.publisher.Flux;
 
 @Repository
 public interface InformationRepository extends ReactiveCrudRepository<Information, Integer> {
-    @Query("Select * from information_table")
-    public Flux<Information> getAllInformation();
+//    @Query("Select * from information_table")
+//    public Flux<Information> getAllInformation();
 }

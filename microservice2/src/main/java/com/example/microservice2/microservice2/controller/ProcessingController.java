@@ -19,7 +19,7 @@ public class ProcessingController {
     @GetMapping(value = "/processed",produces = MediaType.APPLICATION_JSON_VALUE)
     public Flux<Information> getProcessedResult(){
         return webClient.get()
-                .uri(("/api/v1/information/getAllInformation"))
+                .uri("http://localhost:9091/api/v1/information/getAllInformation")
                 .accept(MediaType.APPLICATION_JSON).
                 retrieve().
                 bodyToFlux(Information.class);
