@@ -55,9 +55,9 @@ public class UserService implements IUserService {
 
     @Override
     public Flux<Information> getAllINformationFromMicroservice2() {
-        System.out.println("heyyyy");
         return webClientConfig.get()
                 .uri("http://localhost:8081/api/v1/proceesing/processed")
+                .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToFlux(Information.class);
     }

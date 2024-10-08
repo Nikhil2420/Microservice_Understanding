@@ -1,20 +1,18 @@
 package com.example.microservice1.microservice1.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import reactor.core.publisher.Flux;
 
+import java.util.List;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Responce {
 
-    private Flux<Department> department;
-    private Flux<Information> information;
-    private Flux<User> user;
-
+    private List<User> user;
+    private List<Department> department;
+    private List<Information> information;
 
 }
