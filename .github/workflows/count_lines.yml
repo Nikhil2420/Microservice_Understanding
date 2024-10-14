@@ -16,7 +16,7 @@ jobs:
       - name: Count lines in pushed files
         run: |
           # Loop through each file that was changed in the push
-          for file in $(git diff-tree --no-commit-id --name-only -r ${{ github.sha }}); do
+          for file in ${{git diff-tree --no-commit-id --name-only -r ${{ github.sha }} }}; do
             if [ -f "$file" ]; then  # Check if it is a file
               line_count=$(wc -l < "$file")
               echo "File: $file has $line_count lines."
