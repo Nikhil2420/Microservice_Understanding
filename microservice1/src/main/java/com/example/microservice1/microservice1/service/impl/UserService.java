@@ -24,13 +24,8 @@ public class UserService implements IUserService {
     private WebClient webClientConfig;
 
     @Override
-    public Mono<String> createUser(User user) {
-        log.info(String.valueOf(user));
-
-        Mono<String> a =  userRepository.save(user)
-                .flatMap(x-> Mono.just("success"));
-
-        return a;
+    public Mono<User> createUser(User user) {
+        return userRepository.save(user);
     }
 
     @Override
