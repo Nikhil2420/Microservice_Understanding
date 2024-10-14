@@ -1,3 +1,6 @@
+name: Print Line Count on Push
+
+# Trigger the workflow on every push
 on:
   push:
     branches:
@@ -8,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the latest commit
+      # Step 1: Checkout the latest commit (use the latest available version)
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4  # Update to latest stable version
 
       # Step 2: Find and print the number of lines in each file pushed
       - name: Count Lines in Pushed Files
