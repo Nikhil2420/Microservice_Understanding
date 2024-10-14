@@ -11,9 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the latest commit (use the latest available version)
+      # Step 1: Checkout the latest commit with full history
       - name: Checkout Code
-        uses: actions/checkout@v4  # Update to latest stable version
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all commit history to enable git diff
 
       # Step 2: Find and print the number of lines in each file pushed
       - name: Count Lines in Pushed Files
