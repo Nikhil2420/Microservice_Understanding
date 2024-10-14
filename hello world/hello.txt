@@ -2,3 +2,4 @@ hello anyway
 hello world!!
 hello
 hey!!
+count number of lines
