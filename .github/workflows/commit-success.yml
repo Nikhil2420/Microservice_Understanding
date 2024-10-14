@@ -1,0 +1,14 @@
+name: Commit Success Notification
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch if it's different
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Commit Success Message
+        run: echo "Commit successfully"
