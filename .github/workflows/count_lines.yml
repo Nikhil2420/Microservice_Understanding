@@ -3,7 +3,7 @@ name: Count Lines in Pushed Files
 on:
   push:
     branches:
-      - main  # Change this to your default branch if different
+      - master  # Change this to your default branch if different
 
 jobs:
   count_lines:
