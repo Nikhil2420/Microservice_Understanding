@@ -1,24 +1,29 @@
-name: Count Lines in Pushed Files
-
 on:
   push:
     branches:
-      - master  # Change this to your default branch if different
+      - master   # Trigger on the main branch (change this to any branch you want)
 
 jobs:
-  count_lines:
+  count-lines:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      # Step 1: Checkout the latest commit
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      - name: Count lines in pushed files
+      # Step 2: Find and print the number of lines in each file pushed
+      - name: Count Lines in Pushed Files
         run: |
-          # Loop through each file that was changed in the push
-          for file in ${{git diff-tree --no-commit-id --name-only -r ${{ github.sha }} }}; do
-            if [ -f "$file" ]; then  # Check if it is a file
+          # Get a list of changed files in the push (excluding deleted files)
+          git diff --name-only HEAD~1 HEAD --diff-filter=d > changed_files.txt
+          
+          # Loop through the list of files and print their line count
+          while read file; do
+            if [[ -f $file ]]; then
               line_count=$(wc -l < "$file")
-              echo "File: $file has $line_count lines."
+              echo "$file: $line_count lines"
+            else
+              echo "$file: File does not exist (possibly deleted or moved)"
             fi
-          done
+          done < changed_files.txt
